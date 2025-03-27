@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessible To-Do List</title>
+    <meta
+      name="description"
+      content="A fully accessible task management application"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <header role="banner">
+      <div class="container">
+        <h1 id="app-title">To-Do List</h1>
+        <p id="app-description">Manage your tasks efficiently</p>
+      </div>
+    </header>
+
+    <main role="main" class="container">
+      <section aria-labelledby="task-form-heading">
+        <h2 id="task-form-heading" class="sr-only">Task Form</h2>
+
+        <form id="task-form" aria-labelledby="task-form-heading">
+          <div class="form-group">
+            <label for="task-title" id="title-label">Task Title*</label>
+            <input
+              type="text"
+              id="task-title"
+              required
+              aria-required="true"
+              aria-labelledby="title-label"
+              placeholder="Enter task title"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="task-description" id="desc-label">Description</label>
+            <textarea
+              id="task-description"
+              aria-labelledby="desc-label"
+              placeholder="Enter task description"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="task-due-date" id="date-label">Due Date</label>
+            <input
+              type="date"
+              id="task-due-date"
+              aria-labelledby="date-label"
+            />
+          </div>
+
+          <button
+            type="submit"
+            id="add-task-btn"
+            class="btn-primary"
+            aria-label="Add new task"
+          >
+            Add Task
+          </button>
+        </form>
+      </section>
+
+      <section aria-labelledby="task-list-heading">
+        <h2 id="task-list-heading">Your Tasks</h2>
+        <div
+          id="error-message"
+          role="alert"
+          aria-live="assertive"
+          class="sr-only"
+        ></div>
+
+        <ul
+          id="task-list"
+          aria-labelledby="task-list-heading"
+          role="list"
+          aria-busy="false"
+        >
+          <!-- Tasks will be dynamically inserted here -->
+        </ul>
+      </section>
+    </main>
+
+    <!-- Edit Task Modal -->
+    <div
+      id="edit-modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="edit-modal-title"
+      tabindex="-1"
+    >
+      <div class="modal-content">
+        <button
+          id="close-modal"
+          class="close-btn"
+          aria-label="Close modal dialog"
+        >
+          &times;
+        </button>
+
+        <h2 id="edit-modal-title">Edit Task</h2>
+
+        <form id="edit-task-form" aria-labelledby="edit-modal-title">
+          <input type="hidden" id="edit-task-id" />
+
+          <div class="form-group">
+            <label for="edit-task-title" id="edit-title-label"
+              >Task Title*</label
+            >
+            <input
+              type="text"
+              id="edit-task-title"
+              required
+              aria-required="true"
+              aria-labelledby="edit-title-label"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="edit-task-description" id="edit-desc-label"
+              >Description</label
+            >
+            <textarea
+              id="edit-task-description"
+              aria-labelledby="edit-desc-label"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-task-due-date" id="edit-date-label"
+              >Due Date</label
+            >
+            <input
+              type="date"
+              id="edit-task-due-date"
+              aria-labelledby="edit-date-label"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="edit-task-completed">
+              <input
+                type="checkbox"
+                id="edit-task-completed"
+                aria-label="Task completion status"
+              />
+              Completed
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-primary"
+            aria-label="Save task changes"
+          >
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Screen Reader Announcements -->
+    <div id="sr-announcement" aria-live="polite" class="sr-only"></div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
