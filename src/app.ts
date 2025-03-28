@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import taskRoutes from "./routes/tasks";
+import path from "path";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Enhanced CORS configuration
 app.use(
@@ -16,7 +16,7 @@ app.use(
 
 // Middleware
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Routes
 app.use("/tasks", taskRoutes);
@@ -34,6 +34,4 @@ app.use(
   }
 );
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+export default app;
